@@ -1,0 +1,20 @@
+{
+    "name": "seu-projeto",
+    "version": "1.0.0",
+    "description": "Descrição do seu projeto",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "keywords": [
+        "EcoTour",
+        "seu",
+        "outros",
+        "keywords"
+    ],
+    "author": "Seu Nome",
+    "license": "MIT",
+    "dependencies": {
+       
+    }
+}

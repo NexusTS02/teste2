@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Configuração básica da página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Links para os estilos -->
+    <link rel="stylesheet" href="../../../style.css"> 
+    <link rel="stylesheet" href="../../../pontos.css">
+    
+    <!-- Título da página -->
+    <title>Vale do Capão</title>
+</head>
+<body data-pagina-identificador="pagina5">
+    <!-- Cabeçalho da página -->
+    <header>
+        <div class="logo">
+            <!-- Logo e título -->
+            <img src="../../../imagens/logo/logo.png" alt="Eco Tour">
+            <h1>Eco Tour</h1>
+        </div>
+    </header>
+
+    <!-- Barra de navegação -->
+    <nav class="menu">
+        <ul>
+            <!-- Links para diferentes seções da página -->
+            <li><a href="../../../index.html">Início</a></li>
+            <li><a href="../../../dicas_eco.html">Dicas Eco</a></li>
+            <li class="submenu">
+                <!-- Menu suspenso de Locais Turísticos -->
+                <a href="#">Locais Turísticos</a>
+                <ul class="submenu-list">
+                    <!-- Links para destinos turísticos específicos -->
+                    <li><a href="../../bonito_ms/bonito_ms.html">Bonito-MS</a></li>
+                    <li><a href="../../jalapao_to/jalapao.html">Jalapão-TO</a></li>
+                    <li><a href="../../chapada_ba/chapada.html">Chapada Diamantina-BA</a></li>
+                    <li><a href="../../lençois maranhenses/lencois.html">Lençóis Maranhenses-MA</a></li>
+                    <li><a href="../../serra do cipo/serra_cipo.html">Serra do Cipo-MG</a></li>
+                    <li><a href="../../ilha grande/ilha_grande.html">Ilha Grande-RJ</a></li>
+                </ul>
+            </li>
+            <li><a href="../../../nossa_missao.html">Nossa Missão</a></li>
+        </ul>
+    </nav>
+
+    <!-- Seção principal da página -->
+    <section>
+        <!-- Quadrado - Eco Park Porto da Ilha -->
+        <div class="quadrado centralizado">
+            <div class="conteudo">
+                <!-- Título e imagem do Eco Park -->
+                <h3>Safari Camp Jalapão</h3>
+                <img src="caminho_para_sua_imagem/imagem_ecopark.jpg" alt="Safari Camp Jalapão">
+                <div class="overlay">
+                    <!-- Descrição e informações sobre o Eco Park -->
+                    <p>
+                        O Eco Park Porto da Ilha oferece uma experiência única em meio à natureza.
+                        Descubra aventuras emocionantes, paisagens deslumbrantes e muito mais.
+                    </p>
+                    <ul>
+                        <!-- Lista de atividades disponíveis no Eco Park -->
+                        <li>Passeio de bote, caiaque e stand-up paddle</li>
+                        <li>Bike Boat, Barco Elétrico e Boaia Cross</li>
+                        <li>Day Use no Balneário</li>
+                        <!-- Adicione mais informações conforme necessário -->
+                    </ul>
+                </div>               
+            </div>
+        </div>
+
+        <!-- Mapa do Eco Park -->
+        <div class="mapa centralizado">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d421.27740358840765!2d-41.497618006125464!3d-12.59596224747852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x74209378cb72a9f%3A0xbe177bb041b30534!2sVale%20do%20Cap%C3%A3o%2C%20Palmeiras%2C%20Chapada%20Diamantina%2C%20Bahia!5e0!3m2!1spt-BR!2sbr!4v1700577494930!5m2!1spt-BR!2sbr"width="100%" height="300" style="border: 0px solid #333;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+   <!-- Seção de Avaliação -->
+<section class="avaliacao">
+    <!-- Título da seção de avaliação -->
+    <h3>Avalie o Safari Camp Jalapão</h3>
+    <p>Deixe sua avaliação:</p>
+    <div>
+        <!-- Formulário de avaliação -->
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Seu nome">
+
+        <label for="sobrenome">Sobrenome:</label>
+        <input type="text" id="sobrenome" placeholder="Seu sobrenome">
+
+        <!-- Alteração do rótulo para refletir a escala de 0 a 5 -->
+        <label for="nota">Avaliação (de 0 a 5 estrelas):</label>
+        <input type="number" id="nota" min="0" max="5">
+
+        <!-- Botões para avaliar, resetar histórico e mostrar histórico -->
+        <button onclick="adicionarAvaliacao()">Avaliar</button>
+        <button onclick="resetarHistoricoAvaliacoes()">Resetar Histórico</button>
+        <button class="mostrar-historico">Mostrar Histórico</button>
+    </div>
+
+    <!-- Local para exibir o histórico de avaliações -->
+    <div id="historico-avaliacoes" style="display: none;">
+        <!-- Aqui será exibido o histórico de avaliações -->
+    </div>
+
+    <!-- Local para exibir a média das avaliações -->
+    <div id="media-avaliacoes">
+        <!-- Aqui será exibida a média das avaliações -->
+    </div>
+
+</section>
+
+    <!-- Rodapé da página -->
+    <footer>
+        <p>&copy; 2023 EcoTour. Todos os direitos reservados. <u>Dev by Rodrigo Tavares</u></p>
+    </footer>
+    <script>
+        // Senha para acessar o botão de resetar histórico
+        const senhaResetarHistorico = "1234";
+    
+        // Identificador único para a página
+        const paginaIdentificador = document.body.getAttribute("data-pagina-identificador");
+    
+        // Função para exibir o histórico de avaliações
+        function exibirHistoricoAvaliacoes() {
+            const avaliacoes = JSON.parse(localStorage.getItem(`${paginaIdentificador}_avaliacoes`)) || [];
+            const historicoElement = document.getElementById('historico-avaliacoes');
+    
+            historicoElement.innerHTML = '<h4>Histórico de Avaliações:</h4>';
+            avaliacoes.forEach(avaliacao => {
+                historicoElement.innerHTML += `<p>${avaliacao.nome} ${avaliacao.sobrenome}: ${avaliacao.nota} estrelas</p>`;
+            });
+        }
+    
+        // Função para exibir a média das avaliações
+        function exibirMediaAvaliacoes() {
+            const avaliacoes = JSON.parse(localStorage.getItem(`${paginaIdentificador}_avaliacoes`)) || [];
+            const media = calcularMediaAvaliacoes(avaliacoes);
+            const mediaElement = document.getElementById('media-avaliacoes');
+    
+            if (isNaN(media) || avaliacoes.length === 0) {
+                mediaElement.innerHTML = `<h4>Média de Avaliações: N/A</h4>`;
+            } else {
+                const estrelasInteiras = Math.floor(media);
+                const estrelaFracionada = media - estrelasInteiras;
+    
+                // Cria a representação visual das estrelas
+                let estrelasHTML = '';
+                for (let i = 0; i < estrelasInteiras; i++) {
+                    estrelasHTML += '★';  // Estrela cheia
+                }
+    
+                if (estrelaFracionada > 0) {
+                    estrelasHTML += '☆';  // Estrela vazia
+                }
+    
+                mediaElement.innerHTML = `<h4>Média de Avaliações: ${estrelasHTML} (${media.toFixed(2)})</h4>`;
+            }
+        }
+    
+        // Função para adicionar uma nova avaliação
+        function adicionarAvaliacao() {
+            const nome = document.getElementById('nome').value;
+            const sobrenome = document.getElementById('sobrenome').value;
+            const nota = parseFloat(document.getElementById('nota').value);
+    
+            if (nome && sobrenome && !isNaN(nota) && nota >= 0 && nota <= 5) {
+                // Obtém avaliações existentes ou cria um array vazio
+                const avaliacoes = JSON.parse(localStorage.getItem(`${paginaIdentificador}_avaliacoes`)) || [];
+    
+                // Adiciona a nova avaliação ao array existente
+                const novaAvaliacao = { nome, sobrenome, nota };
+                avaliacoes.push(novaAvaliacao);
+    
+                // Atualiza o armazenamento local com o novo array
+                localStorage.setItem(`${paginaIdentificador}_avaliacoes`, JSON.stringify(avaliacoes));
+    
+                // Exibe o histórico e a média atualizados
+                exibirHistoricoAvaliacoes();
+                exibirMediaAvaliacoes();
+            } else {
+                alert('Por favor, preencha todos os campos corretamente e forneça uma nota de 0 a 5.');
+            }
+        }
+    
+    // Função para resetar o histórico de avaliações (com senha)
+    function resetarHistoricoAvaliacoes() {
+    const senhaDigitada = prompt("Digite a senha para resetar o histórico:");
+
+    if (senhaDigitada === senhaResetarHistorico) {
+        localStorage.removeItem(`${paginaIdentificador}_avaliacoes`); // Use a mesma chave aqui
+        // Atualiza o histórico e a média
+        exibirHistoricoAvaliacoes();
+        exibirMediaAvaliacoes();
+    } else {
+        alert('Senha incorreta. Ação cancelada.');
+    }
+}
+
+    // Função para obter a média das avaliações
+    function calcularMediaAvaliacoes(avaliacoes) {
+        if (avaliacoes.length === 0) return 0;
+        const total = avaliacoes.reduce((soma, avaliacao) => soma + avaliacao.nota, 0);
+        return total / avaliacoes.length;
+    }
+
+    // Exemplo: Adiciona uma avaliação quando a página é carregada
+    exibirHistoricoAvaliacoes();
+    exibirMediaAvaliacoes();
+
+    // Função para exibir ou ocultar o histórico
+    function alternarExibicaoHistorico() {
+        const historicoElement = document.getElementById('historico-avaliacoes');
+        const mostrarHistoricoButton = document.querySelector('.mostrar-historico');
+
+        if (historicoElement.style.display === 'none' || historicoElement.style.display === '') {
+            historicoElement.style.display = 'block';
+            exibirHistoricoAvaliacoes();
+            mostrarHistoricoButton.textContent = 'Ocultar Histórico';
+        } else {
+            historicoElement.style.display = 'none';
+            mostrarHistoricoButton.textContent = 'Mostrar Histórico';
+        }
+    }
+
+    // Evento para alternar entre mostrar e ocultar o histórico ao clicar no botão/link
+    document.querySelector('.mostrar-historico').addEventListener('click', alternarExibicaoHistorico);
+</script>
+</body>
+</html>
+
